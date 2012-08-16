@@ -35,13 +35,13 @@ The Litmos API supports searching and pagination for some methods, so you can pa
 
   users = litmos.users :limit => 100, :start => 100
 
-For methods that aren't yet implemented in the gem, you can simply use the ```get``` method:
+For methods that aren't yet implemented in the gem, you can simply use the *get* method:
 
   litmos.get "teams"
 
 == Dependencies
 
-Litmos-client depends on the {Rest-Client}[https://github.com/archiloque/rest-client, JSON, and Hashugar[https://github.com/jsuchal/hashugar] gems (should be automatically loaded via the gemspec).
+Litmos-client depends on the Rest-client[https://github.com/archiloque/rest-client, JSON, and Hashugar[https://github.com/jsuchal/hashugar] gems (should be automatically loaded via the gemspec).
 
 == TODO
 * Support for retrieving Teams and Courses
