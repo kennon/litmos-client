@@ -21,12 +21,12 @@ Please refer to the {Litmos API Documentation}[http://help.litmos.com/developer-
 You can then query the API for users:
 
   litmos.users
-  litmos.find_by_user_id(id)
+  litmos.find_user_by_id(id)
 
 LitmosClient will automatically convert the result into a ruby object and de-CamelCase the result keys:
 
   # API returns: {"LastName" => "Ballou", "FirstName" => "Kennon", "Id" => "bS5zBrR3"}
-  user = litmos.find_by_user_id("bS5zBrR3")
+  user = litmos.find_user_by_id("bS5zBrR3")
   user.id
   user.first_name
   user.last_name
@@ -34,6 +34,10 @@ LitmosClient will automatically convert the result into a ruby object and de-Cam
 The Litmos API supports searching and pagination for some methods, so you can pass the options :start, :limit, :sort, :dir, and :search. By default the API returns up to the first 100 records.
 
   users = litmos.users :limit => 100, :start => 100
+
+== TODO
+* Support for retrieving Teams and Courses
+* Support for creating objects
 
 == Contributing to litmos-client
  
