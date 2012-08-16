@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "litmos-client"
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kennon Ballou"]
@@ -16,11 +16,29 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "README.rdoc"
   ]
+  s.files = [
+    "Gemfile",
+    "Gemfile.lock",
+    "LICENSE.txt",
+    "README.rdoc",
+    "Rakefile",
+    "VERSION",
+    "lib/litmos-client.rb",
+    "lib/litmos_client.rb",
+    "lib/litmos_client/user.rb",
+    "litmos-client.gemspec",
+    "test/helper.rb",
+    "test/test_litmos_client.rb"
+  ]
   s.homepage = "http://github.com/kennon/litmos-client"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.17"
   s.summary = "Litmos-client is a Ruby wrapper for the Litmos API"
+  s.test_files = [
+    "test/helper.rb",
+    "test/test_litmos_client.rb"
+  ]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
