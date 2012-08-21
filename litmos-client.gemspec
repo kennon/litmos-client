@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "litmos-client"
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kennon Ballou"]
-  s.date = "2012-08-16"
+  s.date = "2012-08-21"
   s.description = "Litmos-Client is a Ruby gem that provides a wrapper for interacting with the Litmos Learning Management System API."
   s.email = "kennon@angryturnip.com"
   s.extra_rdoc_files = [
@@ -25,7 +25,9 @@ Gem::Specification.new do |s|
     "VERSION",
     "lib/litmos-client.rb",
     "lib/litmos_client.rb",
-    "lib/litmos_client/user.rb",
+    "lib/litmos_client/courses.rb",
+    "lib/litmos_client/teams.rb",
+    "lib/litmos_client/users.rb",
     "litmos-client.gemspec",
     "test/helper.rb",
     "test/test_litmos_client.rb"
