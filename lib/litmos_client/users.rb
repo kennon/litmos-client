@@ -1,5 +1,5 @@
 module LitmosClient
-  module User
+  module Users
     def users(params={})
       get :users, params
     end

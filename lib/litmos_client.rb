@@ -2,14 +2,18 @@ require 'rest_client'
 require 'json'
 require 'hashugar'
 
-require File.dirname(__FILE__) + '/litmos_client/user'
+require File.dirname(__FILE__) + '/litmos_client/users'
+require File.dirname(__FILE__) + '/litmos_client/teams'
+require File.dirname(__FILE__) + '/litmos_client/courses'
 
 module LitmosClient
   class NotFound < Exception; end
   class ApiError < Exception; end
 
   class API
-    include LitmosClient::User
+    include LitmosClient::Users
+    include LitmosClient::Teams
+    include LitmosClient::Courses
 
     # Litmos Developer API Documentation: http://help.litmos.com/developer-api/
     API_VERSION = "1"
@@ -41,13 +45,16 @@ module LitmosClient
           # 200 Success. User/Course etc updated, deleted or retrieved
           # 201 Success. User/Course etc created
           return StringHelpers.convert_hash_keys(JSON.parse(response))
+
         when 404 # 404 Not Found. The User/Course etc that you requested does not exist
           raise NotFound.new(response)
+
         else
           # 400 Bad Request. Check that your Uri and request body is well formed
           # 403 Forbidden. Check your API key, HTTPS setting, Source parameter etc
           # 409 Conflict. Often occurs when trying to create an item that already exists
           raise ApiError.new(response)
+
         end        
       end
     end
