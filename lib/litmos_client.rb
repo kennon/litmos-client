@@ -34,18 +34,28 @@ module LitmosClient
     end
 
     def get(path, params={})
+      dont_parse_response = params.delete(:dont_parse_response)
+
       options = {
         :content_type => :json, 
         :accept => :json, 
         :params => params.merge(:apikey => @api_key, :source => @source)
       }
+
       RestClient.get("#{@litmosURL}/#{path}", options) do |response, request, result|
         case response.code
         when 200, 201 
           # 200 Success. User/Course etc updated, deleted or retrieved
           # 201 Success. User/Course etc created
-          return response.blank? ? true : StringHelpers.convert_hash_keys(JSON.parse(response))
-
+          if response.blank?
+            true
+          else
+            if dont_parse_response
+              response
+            else
+              parse_response(response)
+            end
+          end
         when 404 # 404 Not Found. The User/Course etc that you requested does not exist
           raise NotFound.new(response)
 
@@ -63,6 +73,8 @@ module LitmosClient
       query_params = query_params.merge(:apikey => @api_key, :source => @source)
       query_string = query_params.collect { |k,v| "#{k}=#{CGI::escape(v)}" }.join('&')
       query_string = "?#{query_string}" unless query_string.blank?
+
+      dont_parse_response = params.delete(:dont_parse_response)
       
       options = {
         :content_type => :json, 
@@ -74,7 +86,16 @@ module LitmosClient
         when 200, 201 
           # 200 Success. User/Course etc updated, deleted or retrieved
           # 201 Success. User/Course etc created
-          return response.blank? ? true : StringHelpers.convert_hash_keys(JSON.parse(response))
+
+          if response.blank?
+            true
+          else
+            if dont_parse_response
+              response
+            else
+              parse_response(response)
+            end
+          end
 
         when 404 # 404 Not Found. The User/Course etc that you requested does not exist
           raise NotFound.new(response)
@@ -90,17 +111,29 @@ module LitmosClient
     end
 
     def delete(path, params={})
+      dont_parse_response = params.delete(:dont_parse_response)
+
       options = {
         :content_type => :json, 
         :accept => :json, 
         :params => params.merge(:apikey => @api_key, :source => @source)
       }
+
       RestClient.delete("#{@litmosURL}/#{path}", options) do |response, request, result|
         case response.code
         when 200, 201 
           # 200 Success. User/Course etc updated, deleted or retrieved
           # 201 Success. User/Course etc created
-          return response.blank? ? true : StringHelpers.convert_hash_keys(JSON.parse(response))
+
+          if response.blank?
+            true
+          else
+            if dont_parse_response
+              response
+            else
+              parse_response(response)
+            end
+          end
 
         when 404 # 404 Not Found. The User/Course etc that you requested does not exist
           raise NotFound.new(response)
@@ -113,15 +146,20 @@ module LitmosClient
 
         end        
       end
-    end    
+    end
 
-  end
-  
-  module StringHelpers
+  protected
+
+    ASP_DATE_REGEXP=/\/Date\(([0-9]+)\+[0-9]+\)\//
+
+    def parse_asp_date(asp_date)
+      DateTime.strptime(asp_date.gsub(ASP_DATE_REGEXP, '\1'), '%Q')
+    end
+
     # for de-camelCasing the result keys
     # from: http://stackoverflow.com/questions/8706930/converting-nested-hash-keys-from-camelcase-to-snake-case-in-ruby
 
-    def self.underscore(string)
+    def underscore(string)
       string.gsub(/::/, '/').
       gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
       gsub(/([a-z\d])([A-Z])/,'\1_\2').
@@ -129,11 +167,19 @@ module LitmosClient
       downcase
     end
 
-    def self.underscore_key(k)
+    def underscore_key(k)
       underscore(k.to_s).to_sym
     end
 
-    def self.convert_hash_keys(value)
+    def parse_response(response)
+      convert_hash_keys(JSON.parse(response))
+    end
+
+    def convert_hash_keys(value)
+      if value.is_a?(String) and value =~ ASP_DATE_REGEXP
+        return parse_asp_date(value)
+      end
+
       case value
         when Array
           value.map { |v| convert_hash_keys(v) }
@@ -144,6 +190,7 @@ module LitmosClient
           value
        end
     end
+
   end
 
 end
