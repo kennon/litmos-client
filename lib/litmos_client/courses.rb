@@ -5,7 +5,13 @@ module LitmosClient
     end
 
     def find_course_by_id(id)
-      get("courses/#{id}").to_hashugar
+      get("courses/#{id}")
+    rescue NotFound
+      nil
+    end
+
+    def find_courses_by_user_id(id)
+      get("users/#{id}/courses")
     rescue NotFound
       nil
     end

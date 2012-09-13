@@ -1,28 +1,32 @@
 module LitmosClient
   module Users
     def users(params={})
-      get :users, params
+      get(:users, params)
     end
 
     def find_user_by_id(id)
-      get("users/#{id}").to_hashugar
+      get("users/#{id}")
     rescue NotFound
       nil
     end
 
     def create_user(options={})
-      options.merge!({
+      raise ArgumentError.new(":username is required") if options[:username].blank?
+      raise ArgumentError.new(":first_name is required") if options[:first_name].blank?
+      raise ArgumentError.new(":last_name is required") if options[:last_name].blank?
+      raise ArgumentError.new(":email is required") if options[:email].blank?
+
+      params = {
+        'UserName' => options[:username],
+        'FirstName' => options[:first_name],
+        'LastName' => options[:last_name],
+        'Email' => options[:email],
         'DisableMessages' => true,
         'IsCustomUsername' => true,
         'SkipFirstLogin' => true
-      })
+      }
 
-      raise ArgumentError.new("UserName is required") if options['UserName'].blank?
-      raise ArgumentError.new("FirstName is required") if options['FirstName'].blank?
-      raise ArgumentError.new("LastName is required") if options['LastName'].blank?
-      raise ArgumentError.new("Email is required") if options['Email'].blank?
-
-      post "users", options
+      post("users", params)
     end
   end
 end

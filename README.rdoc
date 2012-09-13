@@ -41,7 +41,7 @@ For methods that aren't yet implemented in the gem, you can simply use the *get*
 
 == Dependencies
 
-Litmos-client depends on the Rest-client[https://github.com/archiloque/rest-client], JSON, and Hashugar[https://github.com/jsuchal/hashugar] gems (should be automatically loaded via the gemspec).
+Litmos-client depends on the Rest-client[https://github.com/archiloque/rest-client], and JSON gems (should be automatically loaded via the gemspec).
 
 == TODO
 * Support for retrieving Teams and Courses

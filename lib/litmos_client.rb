@@ -1,6 +1,5 @@
 require 'rest_client'
 require 'json'
-require 'hashugar'
 
 require File.dirname(__FILE__) + '/litmos_client/users'
 require File.dirname(__FILE__) + '/litmos_client/teams'
