@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    litmos-client (0.0.4)
+    litmos-client (0.0.5)
       json
       litmos-client
       rest-client
