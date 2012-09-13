@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "litmos-client"
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kennon Ballou"]
-  s.date = "2012-08-21"
+  s.date = "2012-09-13"
   s.description = "Litmos-Client is a Ruby gem that provides a wrapper for interacting with the Litmos Learning Management System API."
   s.email = "kennon@angryturnip.com"
   s.extra_rdoc_files = [
@@ -59,7 +59,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<shoulda>, [">= 2.11.3"])
       s.add_runtime_dependency(%q<rest-client>, [">= 0"])
       s.add_runtime_dependency(%q<json>, [">= 0"])
-      s.add_runtime_dependency(%q<hashugar>, [">= 0"])
     else
       s.add_dependency(%q<litmos-client>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
@@ -74,7 +73,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<shoulda>, [">= 2.11.3"])
       s.add_dependency(%q<rest-client>, [">= 0"])
       s.add_dependency(%q<json>, [">= 0"])
-      s.add_dependency(%q<hashugar>, [">= 0"])
     end
   else
     s.add_dependency(%q<litmos-client>, [">= 0"])
@@ -90,7 +88,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<shoulda>, [">= 2.11.3"])
     s.add_dependency(%q<rest-client>, [">= 0"])
     s.add_dependency(%q<json>, [">= 0"])
-    s.add_dependency(%q<hashugar>, [">= 0"])
   end
 end
 
