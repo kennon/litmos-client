@@ -28,5 +28,9 @@ module LitmosClient
 
       post("users", params)
     end
+
+    def delete_user(id)
+      delete "/users/#{id}"
+    end
   end
 end
