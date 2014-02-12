@@ -109,6 +109,47 @@ module LitmosClient
         end        
       end
     end
+    
+    def put(path, params={}, query_params={})
+      query_params = query_params.merge(:apikey => @api_key, :source => @source)
+      query_string = query_params.collect { |k,v| "#{k}=#{CGI::escape(v)}" }.join('&')
+      query_string = "?#{query_string}" unless query_string.blank?
+
+      dont_parse_response = params.delete(:dont_parse_response)
+      
+      options = {
+        :content_type => :json, 
+        :accept => :json, 
+      }
+
+      RestClient.put("#{@litmosURL}/#{path}#{query_string}", params.to_json, options) do |response, request, result|
+        case response.code
+        when 200, 201 
+          # 200 Success. User/Course etc updated, deleted or retrieved
+          # 201 Success. User/Course etc created
+
+          if response.blank?
+            true
+          else
+            if dont_parse_response
+              response
+            else
+              parse_response(response)
+            end
+          end
+
+        when 404 # 404 Not Found. The User/Course etc that you requested does not exist
+          raise NotFound.new(response)
+
+        else
+          # 400 Bad Request. Check that your Uri and request body is well formed
+          # 403 Forbidden. Check your API key, HTTPS setting, Source parameter etc
+          # 409 Conflict. Often occurs when trying to create an item that already exists
+          raise ApiError.new(response)
+
+        end        
+      end
+    end
 
     def delete(path, params={})
       dont_parse_response = params.delete(:dont_parse_response)
