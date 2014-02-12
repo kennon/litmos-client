@@ -32,5 +32,9 @@ module LitmosClient
     def delete_user(id)
       delete "/users/#{id}"
     end
+
+    def update_user(id, options={})
+      put("users/#{id}", params)
+    end
   end
 end
