@@ -58,5 +58,5 @@ Litmos-client depends on the Rest-client[https://github.com/archiloque/rest-clie
 
 == Copyright
 
-Copyright (c) 2012 Kennon Ballou. See LICENSE.txt for further details.
+Copyright (c) 2012-2016 Kennon Ballou. See LICENSE.txt for further details.
 
