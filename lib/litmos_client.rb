@@ -19,7 +19,7 @@ module LitmosClient
     API_VERSION = "1"
 
     # Initialize with an API key and config options
-    def initialize(api_key, source, config = {})
+    def initialize(api_key, source = nil, config = {})
       raise ArgumentError.new('Your need to specify your api key') unless api_key
       raise ArgumentError.new('You need to specify a source website') unless source
 
@@ -222,13 +222,13 @@ module LitmosClient
       end
 
       case value
-        when Array
-          value.map { |v| convert_hash_keys(v) }
-          # or `value.map(&method(:convert_hash_keys))`
-        when Hash
-          Hash[value.map { |k, v| [underscore_key(k), convert_hash_keys(v)] }]
-        else
-          value
+      when Array
+        value.map { |v| convert_hash_keys(v) }
+        # or `value.map(&method(:convert_hash_keys))`
+      when Hash
+        Hash[value.map { |k, v| [underscore_key(k), convert_hash_keys(v)] }]
+      else
+        value
        end
     end
 
