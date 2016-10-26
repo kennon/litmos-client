@@ -1,17 +1,16 @@
 PATH
   remote: .
   specs:
-    litmos-client (0.1.0)
-      bundler
+    litmos-client (0.1.1)
       jeweler
+      json
       mocha
-      rake
       rest-client
       shoulda
       test-unit
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     activesupport (5.0.0.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
