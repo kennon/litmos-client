@@ -43,14 +43,14 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<jeweler>.freeze, [">= 0"])
+      s.add_runtime_dependency(%q<litmos-client>.freeze, [">= 0"])
       s.add_runtime_dependency(%q<rest-client>.freeze, [">= 0"])
       s.add_runtime_dependency(%q<json>.freeze, [">= 0"])
       s.add_runtime_dependency(%q<test-unit>.freeze, [">= 0"])
       s.add_runtime_dependency(%q<mocha>.freeze, [">= 0"])
       s.add_runtime_dependency(%q<shoulda>.freeze, [">= 0"])
     else
-      s.add_dependency(%q<jeweler>.freeze, [">= 0"])
+      s.add_dependency(%q<litmos-client>.freeze, [">= 0"])
       s.add_dependency(%q<rest-client>.freeze, [">= 0"])
       s.add_dependency(%q<json>.freeze, [">= 0"])
       s.add_dependency(%q<test-unit>.freeze, [">= 0"])
@@ -58,7 +58,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<shoulda>.freeze, [">= 0"])
     end
   else
-    s.add_dependency(%q<jeweler>.freeze, [">= 0"])
+    s.add_dependency(%q<litmos-client>.freeze, [">= 0"])
     s.add_dependency(%q<rest-client>.freeze, [">= 0"])
     s.add_dependency(%q<json>.freeze, [">= 0"])
     s.add_dependency(%q<test-unit>.freeze, [">= 0"])
