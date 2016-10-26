@@ -1,14 +1,3 @@
-PATH
-  remote: .
-  specs:
-    litmos-client (0.1.1)
-      jeweler
-      json
-      mocha
-      rest-client
-      shoulda
-      test-unit
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -101,7 +90,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  litmos-client!
+  jeweler
+  json
+  mocha
+  rest-client
+  shoulda
+  test-unit
 
 BUNDLED WITH
    1.12.5

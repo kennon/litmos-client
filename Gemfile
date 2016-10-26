@@ -1,4 +1,8 @@
 source "https://rubygems.org"
 
-gemspec
-
+gem "rest-client"
+gem "json"
+gem "test-unit"
+gem "mocha"
+gem "shoulda"
+gem "jeweler"
